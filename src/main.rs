@@ -1,9 +1,11 @@
 mod day1;
+mod day2;
 
 use std::{env, fs::File, io::BufReader};
 
-use crate::day1::Day1;
 use anyhow::{anyhow, Context, Result};
+
+use crate::{day1::Day1, day2::Day2};
 
 pub type Input = BufReader<File>;
 
@@ -28,8 +30,16 @@ impl Day {
 }
 
 fn day(day: usize) -> Option<Day> {
+    fn load<S>() -> Option<Box<dyn Solutions>>
+    where
+        S: Solutions + Default + 'static,
+    {
+        Some(Box::<S>::default())
+    }
+
     let solutions = match day {
-        1 => Some(Box::new(Day1)),
+        1 => load::<Day1>(),
+        2 => load::<Day2>(),
         _ => None,
     }?;
 

@@ -42,6 +42,7 @@ fn last_digit(s: &str) -> Option<u32> {
         .find_map(|start_index| parse_digit(&s[start_index..]))
 }
 
+#[derive(Default)]
 pub struct Day1;
 
 impl Solutions for Day1 {
