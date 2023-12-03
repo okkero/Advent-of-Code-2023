@@ -1,6 +1,6 @@
 use std::{io::BufRead, str::FromStr};
 
-use anyhow::{anyhow, bail, Context, Error, Result};
+use anyhow::{bail, Context, Error, Result};
 
 use crate::{Input, Solutions};
 
@@ -46,7 +46,7 @@ impl FromStr for Game {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let mut split = s.split(": ");
-        let id_part = split.next().ok_or(anyhow!("Unable to read ID part"))?;
+        let id_part = split.next().context("Unable to read ID part")?;
         let data_part = split.next().context("Unable to read data part")?;
 
         let id = id_part[5..].parse().context("Unable to parse ID")?;

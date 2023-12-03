@@ -3,7 +3,7 @@ mod day2;
 
 use std::{env, fs::File, io::BufReader};
 
-use anyhow::{anyhow, Context, Result};
+use anyhow::{Context, Result};
 
 use crate::{day1::Day1, day2::Day2};
 
@@ -49,13 +49,13 @@ fn day(day: usize) -> Option<Day> {
 fn main() -> Result<()> {
     let day_number = env::args()
         .nth(1)
-        .ok_or(anyhow!(
+        .context(
             "Too few arguments. Please pass a day number as the first argument."
-        ))?
+        )?
         .parse()
         .context("Unable to parse first argument as number. Please pass a day number as the first argument.")?;
 
-    let mut day = day(day_number).ok_or(anyhow!("Day not found"))?;
+    let mut day = day(day_number).context("Day not found")?;
     day.run()?;
 
     Ok(())

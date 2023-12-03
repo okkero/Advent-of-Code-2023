@@ -1,6 +1,6 @@
 use std::io::BufRead;
 
-use anyhow::{anyhow, Result};
+use anyhow::{Context, Result};
 
 use crate::{Input, Solutions};
 
@@ -52,7 +52,7 @@ impl Solutions for Day1 {
             .map(|line| {
                 let line = line?;
                 let mut digits = line.chars().filter_map(|c| c.to_digit(10));
-                let first = digits.next().ok_or(anyhow!("No digits in input"))?;
+                let first = digits.next().context("No digits in input")?;
                 let last = digits.last().unwrap_or(first);
 
                 Ok(first * 10 + last)
@@ -67,7 +67,7 @@ impl Solutions for Day1 {
             .lines()
             .map(|line| {
                 let line = line?;
-                let first = first_digit(&line).ok_or(anyhow!("No digits in input"))?;
+                let first = first_digit(&line).context("No digits in input")?;
                 let last = last_digit(&line).unwrap_or(first);
 
                 Ok(first * 10 + last)
