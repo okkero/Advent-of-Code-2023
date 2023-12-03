@@ -1,11 +1,12 @@
 mod day1;
 mod day2;
+mod day3;
 
 use std::{env, fs::File, io::BufReader};
 
 use anyhow::{Context, Result};
 
-use crate::{day1::Day1, day2::Day2};
+use crate::{day1::Day1, day2::Day2, day3::Day3};
 
 pub type Input = BufReader<File>;
 
@@ -40,6 +41,7 @@ fn day(day: usize) -> Option<Day> {
     let solutions = match day {
         1 => load::<Day1>(),
         2 => load::<Day2>(),
+        3 => load::<Day3>(),
         _ => None,
     }?;
 
@@ -62,7 +64,7 @@ fn main() -> Result<()> {
 }
 
 fn read_input(day: usize) -> Result<Input> {
-    Ok(BufReader::new(File::open(format!(
-        "puzzle-input/day{day}"
-    ))?))
+    Ok(BufReader::new(
+        File::open(format!("puzzle-input/day{day}")).context("Unable to read input file")?,
+    ))
 }
