@@ -2,12 +2,13 @@ mod day1;
 mod day2;
 mod day3;
 mod day4;
+mod day5;
 
 use std::{env, fs::File, io::BufReader};
 
 use anyhow::{Context, Result};
 
-use crate::{day1::Day1, day2::Day2, day3::Day3, day4::Day4};
+use crate::{day1::Day1, day2::Day2, day3::Day3, day4::Day4, day5::Day5};
 
 pub type Input = BufReader<File>;
 
@@ -44,6 +45,7 @@ fn day(day: usize) -> Option<Day> {
         2 => load::<Day2>(),
         3 => load::<Day3>(),
         4 => load::<Day4>(),
+        5 => load::<Day5>(),
         _ => None,
     }?;
 
